@@ -61,7 +61,7 @@ void Remove(struct tel_note **note,int *size, int key)
 	int diff = key, i = 0;
 	if (key<(*size))
 	{
-		while ((i<=diff)&&(diff<(*size)))
+		while ((i<=diff)&&(i<*size))
 		{
 			if ((*note)[i].tel[0]==-1) diff++;
 			i++;
