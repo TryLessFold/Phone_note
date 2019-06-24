@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <malloc.h>
+
+struct tel_note
+{
+	char name[20];
+	char lastname[20];
+	char tel[20];
+};
+
+void display()
+{
+	printf("------------------\n");
+	printf("1. Add\n");
+	printf("2. Search\n");
+	printf("3. Delete\n");
+	printf("4. List\n");
+	printf("0. Exit\n\n");
+	printf("Input: ");
+}
+
+void Add (struct tel_note *note ,char *a, char *b, char *c)
+{
+	for(int i = 0; i<20; i++)
+	{
+		note->name[i] = a[i];
+		note->lastname[i] = b[i];
+		note->tel[i] = c[i];
+	}
+}
+
+void Outdirect (struct tel_note* note, int size)
+{
+	for(int i=0;i<size; i++)
+	{
+		printf("%10d%21s%21s%21s\n",i, note[i].name, note[i].lastname, note[i].tel);
+	}
+}
+int main()
+{
+	char ch='1';
+	struct tel_note *note = NULL;
+	int size_direct = 0;
+        char tmp_1[20], tmp_2[20], tmp_3[20];
+	while(ch!='0')
+	{
+		display();
+		scanf("%c", &ch);
+		switch(ch)
+		{
+			case '0':
+				return 0;
+			case '1':
+				size_direct++;
+				note = realloc(note, size_direct*sizeof(struct tel_note));
+				note[size_direct].tel[0] = -1;
+				fgets(tmp_1,20,stdin);
+				printf("Input name: ");
+				fgets(tmp_1,20,stdin);
+				printf("Input lastname: ");
+				fgets(tmp_2,20,stdin);
+				printf("input telephone: ");
+				fgets(tmp_3,20,stdin);
+				Add(&note[size_direct], tmp_1, tmp_2, tmp_3);
+				break;
+			case '4':
+				Outdirect(note, size_direct);
+				break;
+		}
+	}
+	return 0;
+}
